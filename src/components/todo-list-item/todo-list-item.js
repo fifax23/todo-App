@@ -3,31 +3,9 @@ import React from 'react';
 import './todo-list-item.css';
 
 export default class ToDoListItem extends React.Component {
-  
-  state = {
-    done: false,
-    important: false,
-  }
-
-  onLableClick = () => {
-    this.setState((state) => {
-      return {
-        done: !state.done
-      }; 
-    });
-  }
-
-  onMarkImportant = () => {
-    this.setState((state) => {
-      return {
-        important: !state.important
-      }; 
-    });
-  };
 
   render() {
-    const {label} = this.props;
-    const {done, important} = this.state;
+    const {label, onToggleDone, onToggleImportant, important, done} = this.props;
     let classNames = 'todo-list-item';
     if (done) {
       classNames += ' done';
@@ -40,13 +18,13 @@ export default class ToDoListItem extends React.Component {
     return (
       <span className={classNames}>
         <span
-          onClick = { this.onLableClick }
+          onClick = { onToggleDone }
           className="todo-list-item-label">
           {label}
         </span>
   
         <button type="button"
-                onClick = {this.onMarkImportant}
+                onClick = {onToggleImportant}
                 className="btn btn-outline-success btn-sm float-right">
           <i className="fa fa-exclamation" />
         </button>
